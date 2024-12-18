@@ -34,6 +34,12 @@ export class User {
     }
 
     public createUser(user: CreateUsers) {
+        const validateUserName = users.find(i => i.userName === user.userName )
+        if (validateUserName) {
+            console.log('Erro! user name já esta em uso, escolha um diferente!')
+            return
+        }
+
         const newUser = new User(user.nome, user.email, user.userName, user.senha)
         users.push(newUser)
     }
