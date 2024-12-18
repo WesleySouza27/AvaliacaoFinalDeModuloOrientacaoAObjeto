@@ -1,4 +1,18 @@
+import { CreateUser } from './models/CreateUser'
 import { Tweet } from './models/Tweet'
 import { User } from './models/User'
+import { CreateUsers } from './types/types'
 
-const user01 = new User('wesley', 'wesley@gmail.com', 'W27Souza', '12345souza')
+
+const usuario: CreateUsers = {
+    nome: 'theo',
+    email: 'theo@gmail.com',
+    userName: 'theo lucca',
+    senha: 'theo123'
+}
+
+const user01 = new User('theo', 'theo@gmail.com', 'theo lucca', 'theo123')
+
+user01.createUser(usuario)
+
+user01.listarUsers()

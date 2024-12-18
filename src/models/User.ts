@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto"
 import { tweet } from '../dataverse/tweet'
 import { users } from '../dataverse/user'
-import { CreateUser } from '../types/types'
+import { CreateUsers } from '../types/types'
 
 export class User {
     private _id: string
@@ -33,7 +33,7 @@ export class User {
         return this._senha
     }
 
-    public createUser(user: CreateUser) {
+    public createUser(user: CreateUsers) {
         const newUser = new User(user.nome, user.email, user.userName, user.senha)
         users.push(newUser)
     }
