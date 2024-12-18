@@ -12,7 +12,12 @@ const usuario: CreateUsers = {
 }
 
 const user01 = new User('theo', 'theo@gmail.com', 'theo lucca', 'theo123')
+const user02 = new User('theo', 'theo@gmail.com', 'theo lucca', 'theo123')
 
 user01.createUser(usuario)
 
 user01.listarUsers()
+
+user02.createUser(user02)
+
+
