@@ -1,7 +1,7 @@
-import { CreateUser } from './models/CreateUser'
 import { Tweet } from './models/Tweet'
 import { User } from './models/User'
 import { CreateUsers } from './types/types'
+import { TweetType } from './types/types'
 
 
 const usuario: CreateUsers = {
@@ -19,5 +19,13 @@ user01.createUser(usuario)
 user01.listarUsers()
 
 user02.createUser(user02)
+
+user01.createTweet('Hello World!', TweetType.normal)
+user01.listTweets()
+
+// const user01 = User.createUser(usuario)
+// const user02 = User.createUser(usuario)
+
+// user01.listarUsers()
 
 

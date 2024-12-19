@@ -4,3 +4,9 @@ export interface CreateUsers {
     userName: string
     senha: string
 }
+
+
+export enum TweetType {
+    normal = 'Normal',
+    reply = 'Reply'
+}

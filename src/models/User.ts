@@ -1,10 +1,11 @@
 import { randomUUID } from "crypto"
-import { tweet } from '../dataverse/tweet'
-import { users } from '../dataverse/user'
-import { CreateUsers } from '../types/types'
+import { tweets } from '../database/tweet'
+import { users } from '../database/user'
+import { CreateUsers, TweetType } from '../types/types'
+import { Tweet } from "./Tweet"
 
 export class User {
-    private _id: string
+    private readonly _id: string
 
     constructor(
         private _nome: string,
@@ -54,6 +55,16 @@ export class User {
             })
             return mostrar
         }
+    }
+
+    public createTweet(conteudo: string, tipo: TweetType) {
+        const newTweet = new Tweet(this, conteudo, tipo)
+        tweets.push(newTweet)
+    }
+
+    public listTweets() {
+        const tweetsUser = tweets.filter(tweet => tweet.user.id === this._id)
+        tweets.forEach(tweet => console.log(`@<${tweet.user._userName}>: ${tweet.conteudo}\n     <likes>\n     <replies>`))
     }
 
     toJson() {
