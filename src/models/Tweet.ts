@@ -10,12 +10,12 @@ import { Reply } from './Riply'
 
 export class Tweet {
     private readonly _id: string
-    private readonly _likes: number[]
+    private _likes: number[]
+    private _tipo: TweetType
     constructor(
         private _user: User,
         private _conteudo: string,
-        private _tipo: TweetType
-    ) {this._id = randomUUID(), this._likes = []}
+    ) {this._id = randomUUID(), this._likes = [], this._tipo = TweetType.normal}
 
     get user() {
         return this._user
@@ -33,9 +33,18 @@ export class Tweet {
         return this._tipo
     }
 
-    public tweetReply(user: User, ) {
-
+    setTipo(tipo: TweetType) {
+        this._tipo = tipo;
     }
+
+    // public tweetReply(user: User, conteudo: string, tweeter: Tweet) {
+    //     const newTweetReply = new Tweet(user, conteudo)
+    //     newTweetReply._tipo = TweetType.reply
+
+    //     const tweetReply = new Reply(tweeter, this._user, newTweetReply, user)
+
+    //     riplies.push(tweetReply)
+    // }
 
     toJson() {
         return {

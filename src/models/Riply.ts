@@ -1,14 +1,14 @@
 import { randomUUID } from "crypto";
 import { Tweet } from "./Tweet";
 import { User } from "./User";
+import { tweets } from '../database/tweet'
+import { riplies } from '../database/riplies'
 
 export class Reply {
     private readonly _id: string
     constructor(
         private _tweetOrigin: Tweet,
-        private _userOrigin: User,
         private _tweetReply: Tweet,
-        private _userReply: User
     ) {
         this._id = randomUUID()
     }
@@ -21,16 +21,17 @@ export class Reply {
         return this._tweetOrigin
     }
 
-    get userOrigin() {
-        return this._userOrigin
-    }
-
     get tweetReply() {
         return this._tweetReply
     }
 
-    get userReply() {
-        return this._userReply
+
+    toJson() {
+        return {
+            id: this._id,
+            tweetOrigin: this._tweetOrigin,
+            tweetReply: this._tweetReply
+        }
     }
 
 }
