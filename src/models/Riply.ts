@@ -2,7 +2,7 @@ import { randomUUID } from "crypto";
 import { Tweet } from "./Tweet";
 import { User } from "./User";
 import { tweets } from '../database/tweet'
-import { riplies } from '../database/riplies'
+import { replies } from '../database/riplies'
 
 export class Reply {
     private readonly _id: string
