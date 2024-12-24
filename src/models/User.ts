@@ -42,16 +42,16 @@ export class User {
         return this._following
     }
 
-    // public createUser(user: CreateUsers) {
-    //     const validateUserName = users.find(i => i.userName === user.userName )
-    //     if (validateUserName) {
-    //         console.log('Erro! user name já esta em uso, escolha um diferente!')
-    //         return
-    //     }
+    public validateUser() {
+        const validateUserName = users.find(username => username.userName === this.userName )
+        if (validateUserName) {
+            console.log('Erro! user name já esta em uso, escolha um diferente!')
+            return
+        }
 
-    //     const newUser = new User(user.nome, user.email, user.userName, user.senha)
-    //     users.push(newUser)
-    // }
+        users.push(this)
+        console.log(`Usuário ${this.userName} adicionado com sucesso!`)
+    }
 
     // public listarUsers() {
     //     if (users.length === 0) {
@@ -80,23 +80,40 @@ export class User {
         console.log(`Você está seguindo ${user.userName}`)
     }
 
+    // showFeed() {
+    //      const feed = tweets.filter(tweet => this._following.includes(tweet.user))
+    //      const userReply = riplies.filter(reply => reply.tweetOrigin.user.id === this._id)
+
+    //     console.log(`Feed de ${this.userName}:`)
+    //     feed.forEach(tweet => {
+    //         console.log(`@<${tweet.user.userName}>: ${tweet.content}\n         likes : 0`)
+    //         const repliesToTweet = replies.filter(reply => reply.tweetOrigin.id === tweet.id)
+
+    //         if (repliesToTweet.length === 0) {
+    //             console.log(`    < 0: replies >`)
+    //         }
+
+    //         repliesToTweet.forEach(reply => {
+    //             console.log(` > @${reply.tweetReply.user.userName}: ${reply.tweetReply.content}`)
+    //         })
+    //     })
+    // }
+
     showFeed() {
-        const feed = tweets.filter(tweet => this._following.includes(tweet.user))
-        // const userReply = riplies.filter(reply => reply.tweetOrigin.user.id === this._id)
+        // Tweets do usuário atual
+        const feed: Tweet[] = tweets.filter(tweet => this.id === tweet.user.id)
 
-        console.log(`Feed de ${this.userName}:`)
-        feed.forEach(tweet => {
-            console.log(`@<${tweet.user.userName}>: ${tweet.content}\n         likes : 0`)
-            const repliesToTweet = replies.filter(reply => reply.tweetOrigin.id === tweet.id)
+        // Tweets dos usuários que o usuário atual está seguindo
+        const feedFollowing: Tweet[] = this._following.flatMap(user =>
+            tweets.filter(tweet => user.id === tweet.user.id))
 
-            if (repliesToTweet.length === 0) {
-                console.log(`    < 0: replies >`)
-            }
+        const feedFinal = [...feed, ...feedFollowing]
 
-            repliesToTweet.forEach(reply => {
-                console.log(` > @${reply.tweetReply.user.userName}: ${reply.tweetReply.content}`)
+        if (feedFinal.length > 0) {
+            feedFinal.forEach(tweet => {
+                tweet.show()
             })
-        })
+        }
     }
 
 

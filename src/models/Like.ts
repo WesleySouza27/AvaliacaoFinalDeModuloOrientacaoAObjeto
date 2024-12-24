@@ -1,13 +1,21 @@
 import { User } from "./User"
+import { Tweet } from "./Tweet"
 
 export class Like {
-    constructor(private _id: string = '') {}
+  constructor(private readonly _user: User, private readonly _tweet: Tweet) {}
 
-    get id(): string {
-        return this._id
-    }
+  public get user(): User {
+    return this._user;
+  }
 
-    set id(user: User) {
-        this._id = user.id
-    }
+  public get tweet(): Tweet {
+    return this._tweet;
+  }
+
+  public toJson() {
+    return {
+      user: this._user.toJson(),
+      tweet: this._tweet.toJson(),
+    };
+  }
 }
